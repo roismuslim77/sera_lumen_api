@@ -113,6 +113,10 @@ $app->configure('swagger-lume');
 
 $app->register(Kreait\Laravel\Firebase\ServiceProvider::class);
 $app->register(\SwaggerLume\ServiceProvider::class);
+$app->register(Sentry\Laravel\ServiceProvider::class);
+$app->register('Sentry\Laravel\Tracing\ServiceProvider');
+
+$app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

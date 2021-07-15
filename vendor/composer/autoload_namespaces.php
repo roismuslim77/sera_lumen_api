@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Sentry\\Laravel\\' => array($vendorDir . '/sentry/sentry-laravel/src'),
     'Rize\\UriTemplate' => array($vendorDir . '/rize/uri-template/src'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'Jenssegers\\Mongodb' => array($vendorDir . '/jenssegers/mongodb/src'),
