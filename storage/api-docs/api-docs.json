@@ -170,6 +170,83 @@
                 }
             }
         },
+        "/api/v1/email/send": {
+            "post": {
+                "tags": [
+                    "Communication"
+                ],
+                "operationId": "email/send",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "The from parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "ahmad@gmail.com"
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "The to user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "puterstreet@gmail.com"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "The subject user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Hello ?"
+                    },
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "description": "The text user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "This is email from mailgun api"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "List of users",
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "description": "List of users",
+                                            "type": "string",
+                                            "example": "Queued. Thank you."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        },
         "/api/v1/{database}/user": {
             "get": {
                 "tags": [

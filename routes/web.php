@@ -51,5 +51,10 @@ $api->version('v1', function ($api) {
             $api->post('/check', 'AuthController@check');
             $api->post('/logout', 'AuthController@logout');
         });
+
+        //email
+        $api->group(['prefix' => 'email'], function () use($api){
+            $api->post('/send', 'CommunicationController@sentEmail');
+        });
     });
 });
