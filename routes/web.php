@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/debug-sentry', function () {
-    throw new Exception('My first Sentry error!');
+    throw new Exception('This is My first Sentry error!');
 });
 
 $api = app('Dingo\Api\Routing\Router');
