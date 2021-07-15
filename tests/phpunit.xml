@@ -13,11 +13,8 @@
         </testsuites>
     </testsuites>
     <php>
-        <var name="DB_CONNECTION" value="mysql" />
-        <var name="DB_HOST" value="149.129.247.111" />
-        <var name="DB_PORT  " value="3306" />
-        <var name="DB_DATABASE" value="ksidev_cdb" />
-        <var name="DB_USER" value="ksidev_cdb" />
-        <var name="DB_PASSWORD" value="kgeoWUbmsap" />
+        <var name="DB3_CONNECTION" value="mongodb" />
+        <var name="DB3_DATABASE" value="test" />
+        <var name="DB3_DSN" value="mongodb+srv://test:Mustopha123@cluster0.wnxld.mongodb.net/test?retryWrites=true&w=majority" />
     </php>
 </phpunit>

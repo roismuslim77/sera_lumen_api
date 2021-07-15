@@ -1,0 +1,545 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Example API",
+        "contact": {
+            "name": "Support Team",
+            "email": "support@example.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "auth/login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The email parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "test@mail.com"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "1234"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample user things",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "List of users",
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "description": "List of users",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/check": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "auth/check",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "The token parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOiI3ZmNjZTIwNy0xOGE2LTRlOWUtYjUwNS02YTZkMmMwZjhjM2QiLCJpYXQiOjE2MjYzMzQ5NzksImV4cCI6MTYyNjMzODU3OX0.ry2RohXZqrmjV6HxI8MYKamBhpA2cWEuvgYfAW9hnIU"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample user things",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "List of users",
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "description": "List of users",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "auth/logout",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "The token parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOiI3ZmNjZTIwNy0xOGE2LTRlOWUtYjUwNS02YTZkMmMwZjhjM2QiLCJpYXQiOjE2MjYzMzQ5NzksImV4cCI6MTYyNjMzODU3OX0.ry2RohXZqrmjV6HxI8MYKamBhpA2cWEuvgYfAW9hnIU"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample user things",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "List of users",
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "description": "List of users",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "description": "List of users",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        },
+        "/api/v1/{database}/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "user/get",
+                "parameters": [
+                    {
+                        "name": "database",
+                        "in": "path",
+                        "description": "The database parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "mongodb"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample user things",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "List of users",
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "description": "List of users",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "user/post",
+                "parameters": [
+                    {
+                        "name": "database",
+                        "in": "path",
+                        "description": "The database parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "mongodb"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "ahmad"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The email user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "tes@mail.com"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "1234"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "List of users",
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "description": "List of users",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        },
+        "/api/v1/{database}/user/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "user/show",
+                "parameters": [
+                    {
+                        "name": "database",
+                        "in": "path",
+                        "description": "The database parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "mongodb"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "e9e341be-218a-4701-987c-6b5ff7f9b0fd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "List of users",
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "description": "List of users",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "user/delete",
+                "parameters": [
+                    {
+                        "name": "database",
+                        "in": "path",
+                        "description": "The database parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "mongodb"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "e9e341be-218a-4701-987c-6b5ff7f9b0fd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "List of users",
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "description": "List of users",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "user/update",
+                "parameters": [
+                    {
+                        "name": "database",
+                        "in": "path",
+                        "description": "The database parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "mongodb"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "e9e341be-218a-4701-987c-6b5ff7f9b0fd"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "sanusi"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The email user parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "tes@mail.com"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password user parameter in path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "List of users",
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "description": "List of users",
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "Id User",
+                        "type": "string",
+                        "example": "e9e341be-218a-4701-987c-6b5ff7f9b0fd"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name User",
+                        "type": "string",
+                        "example": "sanusi"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "description": "Email User",
+                        "type": "string",
+                        "example": "test@mail.com"
+                    },
+                    "token": {
+                        "description": "Token User",
+                        "type": "string",
+                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOiI3ZmNjZTIwNy0xOGE2LTRlOWUtYjUwNS02YTZkMmMwZjhjM2QiLCJpYXQiOjE2MjYzMzQ5NzksImV4cCI6MTYyNjMzODU3OX0.ry2RohXZqrmjV6HxI8MYKamBhpA2cWEuvgYfAW9hnIU"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            }
+        }
+    }
+}

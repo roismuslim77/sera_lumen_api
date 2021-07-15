@@ -25,11 +25,6 @@ $api->version('v1', function ($api) {
             return response()->json(['status' => 'success', 'message' => env('APP_VERSION')], 200);
         });
 
-        $api->get('dbTime', function () {
-            $results = DB::select( "select date_format(now(),'%Y-%m-%d %H:%i:%s') db_time" );
-            return response()->json(['status' => 'success', 'message' => $results[0]->db_time], 200);
-        });
-
         $api->group(['middleware' => 'auth'], function() use($api) {
             $api->get('version/auth', function () {
                 return response()->json(['status' => 'success', 'message' => env('APP_VERSION')], 200);
@@ -37,13 +32,20 @@ $api->version('v1', function ($api) {
             
         });
 
-        //crud firebase
-        $api->group(['prefix' => 'user'], function () use($api){
+        //crud
+        $api->group(['prefix' => '{database}/user'], function () use($api){
             $api->get('/', 'UserController@index');
             $api->get('/{id}', 'UserController@show');
-            $api->post('/', 'UserCotroller@store');
-            $api->put('/{id}', 'UserController@update');
-            $api->delete('/{id}', 'UserCotroller@delete');
+            $api->post('/', 'UserController@store');
+            $api->patch('/{id}', 'UserController@update');
+            $api->delete('/{id}', 'UserController@delete');
+        });
+
+        //auth
+        $api->group(['prefix' => 'auth'], function () use($api){
+            $api->post('/login', 'AuthController@login');
+            $api->post('/check', 'AuthController@check');
+            $api->post('/logout', 'AuthController@logout');
         });
     });
 });

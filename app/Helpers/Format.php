@@ -50,4 +50,25 @@ class Format
 
         return response()->json(array_merge($response, $data), $code);
     }
+
+    public static function responses($data = null, $withTotal = null, $errorStatus = false, $message = 'Success', $statusCode = 200)
+    {
+        $json = [
+            'error' => $errorStatus,
+            'message' => $message
+        ];
+
+        if (isset($data)) {
+
+            if ($withTotal) {
+                $json['total'] = count($data);
+            }
+            
+            $json['data'] = $data;
+        }
+
+        return response()
+            ->json($json)
+            ->setStatusCode($statusCode);
+    }
 }

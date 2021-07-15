@@ -29,6 +29,7 @@ $app = new Laravel\Lumen\Application(
 
 app('translator')->setLocale('id');
 
+$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 $app->withFacades();
 $app->withEloquent();
 
@@ -108,9 +109,10 @@ $app->alias('mail.manager', Illuminate\Contracts\Mail\Factory::class);
 $app->alias('mailer', Illuminate\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
+$app->configure('swagger-lume');
 
 $app->register(Kreait\Laravel\Firebase\ServiceProvider::class);
-$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

@@ -49,5 +49,11 @@ return [
                 PDO::ATTR_EMULATE_PREPARES => true
             ]) : [],
         ],
+
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'dsn' => env('DB3_DSN'),
+            'database' => env('DB3_DATABASE'),
+        ],
     ],
 ];
