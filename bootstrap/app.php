@@ -109,6 +109,7 @@ $app->alias('mail.manager', Illuminate\Contracts\Mail\Factory::class);
 $app->alias('mailer', Illuminate\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
+
 $app->configure('swagger-lume');
 
 $app->register(Kreait\Laravel\Firebase\ServiceProvider::class);
@@ -135,12 +136,11 @@ $app->router->group([
 });
 
 app('Dingo\Api\Exception\Handler')->register(function (Symfony\Component\HttpKernel\Exception\NotFoundHttpException $exception) {
-
-    return response()->json([
+    return [
         'error' => true,
         'code' => $exception->getStatusCode(),
-        'message' => 'Not Found! The specific API could not be found'
-    ]);
+        'message' => 'Not Found! The specific API could not be found.'
+    ];
 });
 
 app('Dingo\Api\Exception\Handler')->register(function (Symfony\Component\HttpKernel\Exception\HttpException $exception) {

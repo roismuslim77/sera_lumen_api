@@ -56,5 +56,11 @@ $api->version('v1', function ($api) {
         $api->group(['prefix' => 'email'], function () use($api){
             $api->post('/send', 'CommunicationController@sentEmail');
         });
+
+        //rqeres api
+        $api->group(['prefix' => 'reqres'], function () use($api){
+            $api->post('/login', 'ReqresController@login');
+            $api->post('/register', 'ReqresController@register');
+        });
     });
 });
