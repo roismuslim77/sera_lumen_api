@@ -97,7 +97,7 @@ Example Response :
 Example Response :
 ```json
 {
-    "status": 1,
+    "error": false,
     "message": "User deleted"
 }
 ```
@@ -120,7 +120,8 @@ Request Body (JSON) :
     "text": "Body Email"
 }
 ```
-**Reqres API** that can be accessed at 
+
+**Reqres API Login** that can be accessed at 
 **POST** ```api-url.test/api/v1/reqres/login```
 Request Body (JSON) :
 ```json
@@ -129,8 +130,7 @@ Request Body (JSON) :
     "passwor": "Email destination name"
 }
 ```
-
-**POST** ```api-url.test/api/v1/reqres/register```
+**Reqres API Register** that can be accessed at **POST** ```api-url.test/api/v1/reqres/register```
 Request Body (JSON) :
 ```json
 {
