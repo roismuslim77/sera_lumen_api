@@ -1,25 +1,140 @@
-# Lumen PHP Framework
+# Lumen User CRUD API using Multiple Database Connection
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+This is an example of CRUD API implementation using multiple database and *Repository Design Pattern*. A small set of unit test examples are also included.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+### Prerequisite things to do
+- Create a ```.env``` file in the root directory using the example file ```.env.example```
+- Setup your Firebase Project and MongoDB Database, then put it in the ```.env```
 
-## Official Documentation
+### Used Database Connection
+- Firebase Firestore ```firestore```
+- MongoDB ```mongodb```
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+### API End Points
+There are five endpoints in this repo to perform CRUD operation :
+- **Get All Users** - Retrieve all Users from database
+**GET** ```api-url.test/api/v1/{database}/user```
+Example Response :
+```json
+{
+    "error": false,
+    "message": "Success",
+    "data": [
+        {
+            "id": "dc21e1ad-30cb-4b72-89ab-63823e104a10",
+            "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "email": "Updated (again) User Email",
+            "created_at": "2020-12-15 22:51:10",
+            "updated_at": "2020-12-15 22:51:28"
+        }
+    ]
+}
+```
+- **Get a User by ID** - Retrieve a single User from database using its ID
+**GET** ```api-url.test/api/v1/{database}/user/{id}```
+Example Response :
+```json
+{
+    "error": false,
+    "message": "Success",
+    "data": {
+        "id": "dc21e1ad-30cb-4b72-89ab-63823e104a10",
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "email": "Updated (again) User Email",
+        "created_at": "2020-12-15 22:51:10",
+        "updated_at": "2020-12-15 22:51:28"
+    }
+}
+```
+- **Create a New User**
+**User** ```api-url.test/api/v1/{database}/user```
+Request Body (JSON) :
+```json
+{
+    "name": "User Title",
+    "email": "Lorem ipsum dolor sit amet."
+}
+```
+Example Response :
+```json
+{
+    "error": false,
+    "message": "A User has been created",
+    "data": {
+        "id": "fd0eac71-44cf-41c7-a9fb-adc505bb7416",
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "email": "User Email",
+        "created_at": "2020-12-16 01:50:15",
+        "updated_at": "2020-12-16 01:50:15"
+    }
+}
+```
+- **Update an Existing User** - Update a User using its ID
+**PUT** ```api-url.test/api/v1/{database}/user/{id}```
+Request Body (JSON) :
+```json
+{
+    "name": "User Name Updated",
+    "email": "User Email Updated."
+}
+```
+Example Response :
+```json
+{
+    "error": false,
+    "message": "User updated",
+    "data": {
+        "id": "ed458fac-7910-49ee-9cba-e7f76df9c74b",
+        "name": "User Body Updated.",
+        "email": "User Email Updated",
+        "created_at": "2020-12-16 01:50:58",
+        "updated_at": "2020-12-16 01:51:33"
+    }
+}
+```
+- **Delete an Existing User** Delete a User using its ID
+**DELETE** ```api-url.test/api/v1/{database}/user/{id}```
+Example Response :
+```json
+{
+    "status": 1,
+    "message": "User deleted"
+}
+```
 
-## Contributing
+The ```{database}``` should be replaced with corresponding database connection available. For example if you're about to use **Firebase Firestore** to get all the Users, then the API end point becomes ```api-url.test/api/v1/firestore/user```
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Unit Test
+Run this command to test **Get All Users API**, **Get a User by ID API**, and **Create a New User API**
+```sh
+$ vendor/bin/phpunit
+```
+### Bonus(?)
+**Email Send** in ```app/Controllers/CommunicationController.php``` that can be accessed at **POST** ```api-url.test/api/v1/email/send```
+Request Body (JSON) :
+```json
+{
+    "from": "Email origin name",
+    "to": "Email destination name",
+    "subject": "Subject Email",
+    "text": "Body Email"
+}
+```
+**Reqres API** that can be accessed at 
+**POST** ```api-url.test/api/v1/reqres/login```
+Request Body (JSON) :
+```json
+{
+    "email": "Email origin name",
+    "passwor": "Email destination name"
+}
+```
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# boilerplate-lumen-api
+**POST** ```api-url.test/api/v1/reqres/register```
+Request Body (JSON) :
+```json
+{
+    "email": "Email origin name",
+    "passwor": "Email destination name"
+}
+```
