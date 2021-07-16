@@ -138,3 +138,5 @@ Request Body (JSON) :
     "passwor": "Email destination name"
 }
 ```
+### Documentation(?)
+**SWAGGER Documentation** that can be accessed at ```api-url.test/api/documentation```
